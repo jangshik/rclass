@@ -229,11 +229,9 @@ ncol(aws)
 dim(aws)
 colnames(aws)
 names(aws)
-aws$TA ## $를 이용한 데이터 추출
-aws$TA[961]
-aws[c(2, 135, 3:10),]
-aws[,c(1,3)]
-aws[wind,]
+
+install.packages("ggplot2")
+
 #### ____ ● 재미난 패키지 ####
 
 
@@ -280,7 +278,29 @@ aws[wind,]
 
 
 #### ____ ● 벡터연산을 사용한 데이터 추출 - 행열 ####
-
+aws$TA ## $를 이용한 데이터 추출
+aws$TA[961]
+aws[c(2, 135, 3:10),]
+aws[,c(1,3)] ##비워두면 전체
+aws[1:50,3:4]
+aws[,"Wind"]
+aws[2:5, c("TA","Wind")]
+aws[1,] = -1
+aws[1,]
+aws[1:2,] = -33
+aws[1:5, 1:5]
+aws["6",] = -4
+head(aws)
+aws[c(1:2, 6),] = -6666
+head(aws)
+aws[1:4, -3] ## 3번째 열을 뺌
+head(aws)
+aws[,6] = "new"
+head(aws)
+aws[,ncol(aws)+1] = "neuuuuuw"
+head(aws)
+aws[,"last_one"] = 12345
+head(aws)
 #### __ [12] 데이터 치환/삽입 ####
 #### ____ ● 벡터연산을 사용한 데이터 치환 ####
 # ※ 순서대로 입력하세요.
@@ -289,18 +309,32 @@ aws[wind,]
 #### ____ ● 벡터연산을 사용한 데이터 삽입 ####
 
 # Q. column 명을 바꿔봅시다.
-
+colnames(aws)[colnames(aws)=="v6"] <- "aa"
+head(aws)
+colnames(aws)[6]<-"aa"
+head(aws)
+colnames(aws)[7]="bb"
+haed(aws)
+head(aws)
+colnames(aws)
+colnames(aws)[c(6,7)]=c("AA", "BB")
+aws[,"last_one"] = "asdf"
+head(aws)
 
 #### __ [13] 데이터 병합 ####
 #### ____ ● bind 함수를 사용한 데이터 병합 ####
 aaa = aws[10:13, 3:4]
 bbb = aws[20:23, 3:4]
-
+aaa
+bbb
+ccc = aws[24:30, 1:2]
+ccc
 # cbind()
-
+cbind(aaa,bbb) #column bind 옆으로 붙임
+cbind(aaa,ccc) #달라서 안댐
 # rbind()
-
-
+rbind(aaa,bbb) #row bind 밑으로 붙여나감 형식, 갯수 같아야함.
+rbind(aaa,ccc) # 이름 달라서 안됨
 #### __ [14] 데이터 요약 ####
 #### ____ ● 개요 ####
 # ▶ str(): 객체 구조 확인
@@ -313,20 +347,36 @@ bbb = aws[20:23, 3:4]
 # ▶ table(): 객체의 고유 원소 개수 계산
 # ▶ aggregate(): 조건에 따른 요약 정보 계산
 # ▶ apply(): (2차원) 객체의 row 또는 column 기준 일괄 계산
+library("ggplot2")
+data("diamonds",package="ggplot2")
+head(diamonds,3)
+table(diamonds$cut, diamonds$clarity) # cut ideal, clarity SI2 2598회
+table(diamonds$cut)
+prop.table(table(diamonds$cut))
+prop.table(table(diamonds$cut)) * 100
+round(prop.table(table(diamonds$cut)) * 100, 2)
+tb=table(diamonds$cut, diamonds$clarity)
+tb
+prop.table(tb)
+prop.table(tb,margin =1) ##margin 1은 row의합 1
+prop.table(tb,margin =2) ##margin 2는 column의합 1
 
-
+sum(tb)==nrow(diamonds)
 #### ____ ● table() 함수를 사용한 표 만들기 ####
 # install.packages("ggplot2")
 
 
 #### ____ ● 데이터 준비 ####
 data("airquality")
+df=airquality
+head(df,2)
+
 
 #### ____ ● 함수의 활용 ####
 # unique()
-
+unique(df$Month)
 # quantile()
-
+quantile(df$Wind)
 
 #### __ [15] 문자열 데이터 처리 ####
 #### ____ ● 기본 처리 ####
