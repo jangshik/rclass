@@ -66,14 +66,38 @@
 #### ____ ● 명령어 실행 ####
 
 
-
 #### __ [05] 연산자 ####
 #### ____ ● 할당 연산자 ####
 
+# X=1 X에 1을 대입
+# X <- 1
+# X <<- 1 X에 1을 대입(함수내에서 활용)
+# 1 -> X  X에 1을 대입
+# 1 ->> X X에 1을 대입(함수내에서 활용)
+
 #### ____ ● 산술 연산자 ####
+# 
+# %/% modulo 정수나눗셈
+# %% remainder 정수나눗셈 나머지
+# ^or ** 제곱
 
 #### ____ ● 논리 연산자 ####
+# == 같음
+# != 같지않음
+# & 논리곱(Logical AND)
+# | 논리합(Logical OR)
+# ! 논리부정 (Logical NOT)
 
+# "감자"=="고구마"
+# "감자" !="고구마"
+# floor(24.51)
+# round(24.51, -1)
+# round(26.51, -1)
+# factorial(4)
+# seq(from =1, to=3)
+# seq(from =1, to=3, by =1.2)
+# rep(1:3, 3)
+# seq(from = 1, to=3, length.out=8)
 
 #### __ [06] 기초 산술 함수 ####
 #### ____ ● 산술 함수 ####
@@ -110,16 +134,63 @@
 
 #### ____ ● 객체 구조 ####
 # 벡터 - c()
+c(1, 2, 3)
+c(1, 2, "a") ##문자가 우선됨. 전체 문자
+aa=c(1,2,3) #aa라는 객체에 1,2,3을 저장함.
+aa[2]
+aa[3] = "b"
+aa[1:2]
+aa[c(1,3)]
+aa
 
 # 행렬 - matrix() 
-
+matrix(1:6)
+matrix(1:6, nrow=2) #n(umber)ofrows -> 
+matrix(1:6, ncol=2) #n(umber)ofcolumns -> 
+matrix(1:6, nrow=2, byrow=TRUE) #byrow -> 원소 row먼저 채움
+mat=matrix(1:6, nrow=2, byrow=TRUE)
+mat
 # 데이터 프레임 - data.frame()
+data.frame(aa=1:3,
+           bb = c("a", "b", "c"))
 
+df = data.frame(aa= 1:3,
+                bb=c("a", "b", "c"))
+df
+df[,1]
+df[1,]
 # 리스트 - list()
+list(aa=1:4,
+     bb=matrix(1:9, nrow=3),
+     cc=list(dd=1:3,
+             ee=letters[2:4]))
+listt = list(aa=1:4,
+                bb=matrix(1:9, nrow=3),
+                cc=list(dd=1:3,
+                        ee=letters[2:4])) ##letters객체의 2~4(b,c,d)
+listt
+listt$aa ## $는 of의 개념 -> listt의 aa
+listt$bb
+listt$cc
+listt$cc$dd
+listt$cc$dd[1]
+listt$cc$ee
 
+
+
+install.packages("imager")
 #### ____ ● 자료구조 - 이미지 ####
 library("imager")
 img = load.image("sample_cat_image.jpg")
+plot(img)
+dim(img)
+img[1:5, 1:5 ,,1]
+img[,,,1] =1 - img[,,,1]
+img[,,,2] =1 - img[,,,2]
+img[,,,3] =1 - img[,,,3]
+plot(img)
+
+plot(img)
 
 #### ____ ● 자료구조 - 웹페이지 ####
 web = readLines("sample_webpage_text.txt")
@@ -133,7 +204,9 @@ web = readLines("sample_webpage_text.txt")
 #### ____ ● 패키지 설치(인터넷 X) ####
 # https://cran.r-project.org/
 
-
+install.packages("beepr")
+library("beepr")
+beep(5)
 #### ____ ● 패키지 불러오기 ####
 
 #### ____ ● 유용한 패키지 ####
@@ -142,8 +215,25 @@ web = readLines("sample_webpage_text.txt")
 # ▶ 데이터 분석 등 기계학습 관련: CART, e1071, C50, DMwR
 # ▶ 시계열 데이터 처리: lubridate, xtm
 # ▶ 텍스트 처리: splitstackshape, KoNLP
-
-
+getwd() #작업폴더 경로확인
+setwd("bank")
+setwd("..")
+getwd()
+aws=read.delim("AWS_sample.txt",sep="#", stringsAsFactors = FALSE)
+head(aws)
+tail(aws)
+str(aws) #structure
+summary(aws)
+nrow(aws)
+ncol(aws)
+dim(aws)
+colnames(aws)
+names(aws)
+aws$TA ## $를 이용한 데이터 추출
+aws$TA[961]
+aws[c(2, 135, 3:10),]
+aws[,c(1,3)]
+aws[wind,]
 #### ____ ● 재미난 패키지 ####
 
 
