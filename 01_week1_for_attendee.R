@@ -415,14 +415,31 @@ cSplit(sample, splitCols = "aa", sep="_", drop=FALSE) #drop은 기존자료도�
 # 문자 결합
 paste0(sample[,1], sample[,2]) # 0은 사이공간없이 뙇 붙임
 paste(sample[,1], sample[,2]) #그냥때리면 스페이스들어감
-paste(sample[,1], sample[,2], sep="이렇게분리됨") #구분자에 sep넣음
+paste(sample[,1], sample[,2], sep=" 이렇게분리됨 ") #구분자에 sep넣음
+paste("010", "1111", "2222", sep = "-")
+paste("010", "1111", "2222", collapse = "-")
+paste(c("010", "1111", "2222"), sep = "-")
+paste(c("010", "1111", "2222"), collapse = "-")
+
 # 특정 위치 문자 추출
 substr(sample[,1],1,4) #1번째부터 4번째 글자까지, 1열에
+substr(sample$aa, 1,2)
 sample
+
+
+
 #### __ [16] 반복문 조건문 ####
 #### ____ ● 반복문 - for() ####
 # for() 함수
-
+for(number in 1:3){
+  print(number)
+}
+for(number in c(1,3,9)){
+  print(number)
+}
+for(num in 3:6){
+  print(num*num)
+}
 
 # 데이터 준비
 df_1 = data.frame(aa = c("a", "b", "c", "d"),
@@ -430,8 +447,10 @@ df_1 = data.frame(aa = c("a", "b", "c", "d"),
 df_1
 
 # 응용
-
-
+for(num in 1:4){
+  df_1[num, "new_column"] = num*2
+}
+df_1
 #### ____ ● 조건문 - if() ####
 # if() 함수
 
