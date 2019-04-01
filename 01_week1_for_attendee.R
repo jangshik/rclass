@@ -374,10 +374,15 @@ head(df,2)
 
 #### ____ ● 함수의 활용 ####
 # unique()
-unique(df$Month)
-# quantile()
-quantile(df$Wind)
+unique(df$Month) #Month에 중복자료 제거 
+length(unique(df$Month)) #5개(5,6,7,8,9) -> ex)몇개월치인지
+length(c(2,4,6)) # 1차원객체?? 원소?? 뭐야이건
 
+# quantile()
+quantile(df$Wind) #dd
+quantile(df$Wind, probs = 0.01) #하위1프로
+quantile(df$Wind, probs = 0.99)
+quantile(df$Wind, probs = c(0.05, 0.95))
 #### __ [15] 문자열 데이터 처리 ####
 #### ____ ● 기본 처리 ####
 # 데이터 준비
@@ -386,26 +391,34 @@ sample = data.frame(aa = c("abc_sdfsdf", "abc_KKdfsfsfs", "ccd"),
                     stringsAsFactors = FALSE)
 sample
 
+
+
+
+
+
 # 문자 개수 세기
-
+nchar(sample[1,1])
 # 특정 문자 위치 확인
-
+which(sample[,1] =="ccd") #ccd의 위치찾기
 # 대소문자 변환
-
-
+toupper(sample[1,1]) #대문자로
+tolower(sample[2,1]) #소문자로
+which(c(TRUE,FALSE,TRUE))
 #### ____ ● 응용 ####
+install.packages("splitstackshape")
 # install.packages("splitstackshape")
-
+library("splitstackshape")
 # 문자열 분리
 # cSplit <- S 대문자 입니다.
-
-
+cSplit(sample, splitCols = "aa", sep="_") #sep 은 _ 기준으로 분리
+cSplit(sample, splitCols = "aa", sep="_", drop=FALSE) #drop은 기존자료도유지
 # 문자 결합
-
-
+paste0(sample[,1], sample[,2]) # 0은 사이공간없이 뙇 붙임
+paste(sample[,1], sample[,2]) #그냥때리면 스페이스들어감
+paste(sample[,1], sample[,2], sep="이렇게분리됨") #구분자에 sep넣음
 # 특정 위치 문자 추출
-
-
+substr(sample[,1],1,4) #1번째부터 4번째 글자까지, 1열에
+sample
 #### __ [16] 반복문 조건문 ####
 #### ____ ● 반복문 - for() ####
 # for() 함수
