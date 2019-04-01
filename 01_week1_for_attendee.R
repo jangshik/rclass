@@ -436,6 +436,7 @@ for(number in 1:3){
 }
 for(number in c(1,3,9)){
   print(number)
+  Sys.sleep(1) # 1초쉬고 또
 }
 for(num in 3:6){
   print(num*num)
@@ -447,12 +448,25 @@ df_1 = data.frame(aa = c("a", "b", "c", "d"),
 df_1
 
 # 응용
-for(num in 1:4){
-  df_1[num, "new_column"] = num*2
+for(num in 2:5){
+  df_1[num, "new_column"] = num*2 # num번째 row에 "new_column"컬럼에
 }
 df_1
 #### ____ ● 조건문 - if() ####
 # if() 함수
+
+n=3
+if(n==3){
+  print("n은 3입니다")
+}else{
+  print("n은 3이 아닙니다.")
+}
+n=5
+if(n==3){
+  print("n은 3입니다")
+}else{
+  print("n은 3이 아닙니다.")
+}
 
 # 데이터 준비
 df_1 = data.frame(aa = c("a", "b", "c", "d"),
@@ -460,6 +474,13 @@ df_1 = data.frame(aa = c("a", "b", "c", "d"),
 df_1
 
 # 응용
+for(n in 1:4){
+  if(n>=3){
+    print(df_1[n, "bb"])
+  }else{
+    print("응응?")
+  }
+  }
 
 #### ____ ● 조건 연산자 ####
 # 데이터 준비
@@ -467,11 +488,23 @@ df_1 = data.frame(aa = c("a", "b", "c", "d"),
                   bb = 1:4)
 
 # 실습
-
-
-
+df_1[df_1$bb >= 3,] #bb의 row 3이상
+df_1[df_1$aa == "b",] #b가 있는애만
+df_1[df_1$aa != "b",] #b가 없는애만
+df_1[(df_1$bb == 1) & (df_1$bb == 4), ] 
+df_1[df_1$bb %in% c(1,4), ]
 #### __ [17] 파일 입출력 ####
 #### ____ ● 파일 불러오기 ####
+df = read.csv("bike.csv")
+head(df,2)
+
+library("data.table")
+df = fread("bike.csv") #fread 빠르게읽긔
+head(df,2)
+
+library("data.table")
+df = fread("bike.csv", nrows=4, select=c(1:3, 5), skip=1) #fread 빠르게읽긔
+df
 
 #### ____ ● 다양한 데이터 불러오기 ####
 # life_expectancy
@@ -485,3 +518,11 @@ df_1 = data.frame(aa = c("a", "b", "c", "d"),
 # store_apple
 
 #### ____ ● 파일 저장하기 ####
+install.packages("readr")
+install.packages("xlsx")
+write.csv(df, "write_csv_basic.csv", row.names=FALSE) #row.names=FALSE
+library("readr")
+write_tsv(df, "write_tsv.txt")
+
+library("xlsx")
+write.xlsx(df,"write_xlsx.xlsx")
